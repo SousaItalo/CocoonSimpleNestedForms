@@ -1,0 +1,16 @@
+<%= form_for @product do |f| %>
+  <div class="field">
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %>
+    <%= link_to_add_association 'add', f, :info_products,
+        'data-association-insertion-node' => "#info_products",
+        'data-association-insertion-method' => "append"%>
+    
+    <div id="info_products">
+        <%= f.fields_for :info_products do |info_product| %>
+            <render "info_product_fields", locals: {f: info_product} %>
+        <%end%>
+    </div>
+  </div>
+<%= f.submit 'Save' %>
+<% end %>
